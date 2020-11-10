@@ -25,7 +25,7 @@ public final class TestSportByStaticInnerClass {
         final SportSocialNetworkUserImpl<User> falonso = new SportSocialNetworkUserImpl<User>("Fernando","Alonso", "falonso", 34);
 
         /*
-         * TODO: alonso is a fan of soccer and bike and practices F1: 
+         * Alonso is a fan of soccer and bike and practices F1: 
          * add these sports to Alonso
          * 
          * falonso.addSport(SportSocialNetworkUserImpl.F1);
