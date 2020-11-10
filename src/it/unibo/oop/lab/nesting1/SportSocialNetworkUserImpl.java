@@ -4,6 +4,7 @@
 package it.unibo.oop.lab.nesting1;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import it.unibo.oop.lab.socialnetwork.SocialNetworkUserImpl;
@@ -49,16 +50,13 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     public static final Sport BIKE;
 
-    /*
-     * TODO: initialize properly these sports
-     */
     static {
-        SOCCER = null;
-        F1 = null;
-        MOTOGP = null;
-        VOLLEY = null;
-        BASKET = null;
-        BIKE = null;
+        SOCCER = new Sport("SOCCER");
+        F1 = new Sport("F1");
+        MOTOGP = new Sport("MOTOGP");
+        VOLLEY = new Sport("VOLLEY");
+        BASKET = new Sport("BASKET");
+        BIKE = new Sport("BIKE");
     }
 
     /**
@@ -102,7 +100,6 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
     /*
      * [METHODS]
      * 
-     * Implements all the methods below
      */
 
     /**
@@ -111,40 +108,82 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * 
      * @param sport
      *            a sport followed/done by the user
+     * @throws NullPointerException if {@link sport} is null
      */
-    // TODO
     public void addSport(final Sport sport) {
-
+    	Objects.requireNonNull(sport);
+    	this.sports.add(sport);
     }
 
     /**
      * Returns true if a user likes/does a given sport.
      * 
-     * @param s
+     * @param sport
      *            sport to use as an input
+     * @throws NullPointerException if {@link sport} is null
      * @return true if a user likes sport s
      */
     // TODO
-    public boolean hasSport(final Sport s) {
-        return false;
+    public boolean hasSport(final Sport sport) {
+    	Objects.requireNonNull(sport);
+        return this.sports.contains(sport);
     }
 
-    /*
-     * TODO
-     * 
-     * Complete the definition of this static inner class defining a Sport along
-     * with its bare name.
+    /**
+     * Class that defines a sport
+     * @author Marco
+     *
      */
     public static final class Sport {
-        /*
-         * TODO
-         * 
-         * Redefine equals so that two sports are equal only if they feature the
-         * very same name. Remember that you must also redefine hashCode()!
-         */
-        @Override
-        public boolean equals(final Object o) {
-            return false;
-        }
+    	/**
+    	 * Name of the sport
+    	 */
+    	private String name;
+    	
+    	/**
+    	 * Creates a sport class with a specific name
+    	 * @param name Name of the sport
+    	 */
+    	public Sport(String name) {
+    		this.name = name;
+    	}
+
+    	/**
+    	 * {@inheritDoc}
+    	 * Same hashCode for sports that have the same name
+    	 */
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			return result;
+		}
+
+		/**
+		 * {@inheritDoc}
+		 * Two sports are equal if and only if they share the same name
+		 */
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+			if (obj == null) {
+				return false;
+			}
+			if (getClass() != obj.getClass()) {
+				return false;
+			}
+			Sport other = (Sport) obj;
+			if (name == null) {
+				if (other.name != null) {
+					return false;
+				}
+			} else if (!name.equals(other.name)) {
+				return false;
+			}
+			return true;
+		}
     }
 }
