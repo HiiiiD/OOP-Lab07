@@ -108,7 +108,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * 
      * @param sport
      *            a sport followed/done by the user
-     * @throws NullPointerException if {@link sport} is null
+     * @throws NullPointerException if sport is null
      */
     public void addSport(final Sport sport) {
     	Objects.requireNonNull(sport);
@@ -120,7 +120,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * 
      * @param sport
      *            sport to use as an input
-     * @throws NullPointerException if {@link sport} is null
+     * @throws NullPointerException if sport is null
      * @return true if a user likes sport s
      */
     // TODO
