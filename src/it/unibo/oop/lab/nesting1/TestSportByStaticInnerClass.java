@@ -5,11 +5,7 @@ import it.unibo.oop.lab.socialnetwork.User;
 /**
  * This is going to act as a test for
  * {@link it.unibo.oop.lab.nesting1.SportSocialNetworkUserImpl}
- * 
- * 1) Complete the test as per comments below
- * 
- * 2) Run it: every test must return true.
- * 
+ * Every test must return true
  */
 public final class TestSportByStaticInnerClass {
 

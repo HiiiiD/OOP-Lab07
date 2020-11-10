@@ -8,10 +8,8 @@ import java.util.Set;
 import it.unibo.oop.lab.socialnetwork.User;
 
 /**
- * 
- * 1) Complete the test as per comments below
- * 
- * 2) Run it: every test must return true.
+ * Test class for {@link Sport2SocialNetworkUserImpl}
+ * Every test must return true
  * 
  */
 public final class TestSportAdvancedEnumeration {

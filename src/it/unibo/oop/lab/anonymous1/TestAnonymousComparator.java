@@ -10,15 +10,10 @@ import it.unibo.oop.lab.socialnetwork.SocialNetworkUserImpl;
 import it.unibo.oop.lab.socialnetwork.User;
 
 /**
- * Instruction: define two comparators as anonymous classes in oder to sort a
+ * Defining two comparators as anonymous classes in oder to sort a
  * list of user in the appropriate way.
  * 
- * 1) Study carefully the test in order to understand it
- *
- * 2) Introduce the anonymous comparator where required in order to make the
- * test succeed.
- * 
- * (Refer to: 13-Advanced-Mechanisms.pdf, slide 39)
+ * Every test must return true
  * 
  */
 public final class TestAnonymousComparator {
