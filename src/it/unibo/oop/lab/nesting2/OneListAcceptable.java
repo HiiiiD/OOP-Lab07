@@ -1,8 +1,9 @@
 package it.unibo.oop.lab.nesting2;
 
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * {@link Acceptable} that accepts a list
@@ -30,29 +31,35 @@ public class OneListAcceptable<T> implements Acceptable<T> {
 	}
 	
 	/**
-	 * Acceptor that accepts a list
+	 * Acceptor that accepts a list, made a separate class to make it more clear
 	 * @author Marco
 	 *
 	 */
 	private class OneListAcceptor implements Acceptor<T> {
 
-		private List<T> acceptedList = new ArrayList<T>(acceptableList.size());
-		private boolean isTerminated = false;
+		private final Iterator<T> iterator = acceptableList.iterator();
 		
 		@Override
 		public void accept(T newElement) throws ElementNotAcceptedException {
-			if (!acceptableList.contains(newElement) || isTerminated) {
-				throw new ElementNotAcceptedException(newElement);
+			
+			try {
+				if (newElement.equals(iterator.next())) {
+					return;
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println("There are no more elements to be evaluated");
 			}
-			acceptedList.add(newElement);
+			
+			throw new ElementNotAcceptedException(newElement);
 		}
 
 		@Override
 		public void end() throws EndNotAcceptedException {
-			if (acceptedList.size() != acceptableList.size()) {
-				throw new EndNotAcceptedException();
+			if (!iterator.hasNext()) {
+				return;
 			}
-			isTerminated = true;
+			
+			throw new EndNotAcceptedException();
 		}
 		
 	}
