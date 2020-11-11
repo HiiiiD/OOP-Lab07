@@ -5,6 +5,7 @@ package it.unibo.oop.lab.enum2;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import it.unibo.oop.lab.socialnetwork.SocialNetworkUserImpl;
 import it.unibo.oop.lab.socialnetwork.User;
@@ -101,13 +102,15 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
      * @return the set of individual sport this user practices/follows
      */
     public Set<Sport> getIndividualSports() {
-    	Set<Sport> returnValue = new HashSet<Sport>();
-    	for (Sport sport : this.followedSports) {
-    		if (sport.isIndividualSport()) {
-    			returnValue.add(sport);
-    		}
-    	}
-    	return returnValue;
+    	return filterSportsByPredicate(new Predicate<Sport>() 
+    	{
+
+			@Override
+			public boolean test(Sport t) {
+				return t.isIndividualSport();
+			}
+    		
+    	});
     }
     
     /** Returns the set of sports which are practiced in a given place.
@@ -118,9 +121,26 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
      * @return the set of sport practiced in a given place
      */
     public Set<Sport> getSportPracticedInPlace(Place p) {
+    	return filterSportsByPredicate(new Predicate<Sport>() 
+    	{
+
+			@Override
+			public boolean test(Sport t) {
+				return t.getPlace().equals(p);
+			}
+    		
+    	});
+    }
+    
+    /**
+     * Filter the followed sports by a predicate
+     * @param predicate Predicate for choosing sports
+     * @return Set of sports 
+     */
+    public Set<Sport> filterSportsByPredicate(Predicate<Sport> predicate) {
     	Set<Sport> returnValue = new HashSet<Sport>();
     	for (Sport sport : this.followedSports) {
-    		if (sport.getPlace().equals(p)) {
+    		if (predicate.test(sport)) {
     			returnValue.add(sport);
     		}
     	}
